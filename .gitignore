@@ -1,0 +1,42 @@
+src/*.exe
+src/legendarycoin
+src/legendarycoind
+src/test_legendarycoin
+.*.swp
+*.*~*
+*.bak
+*.rej
+*.orig
+*.o
+*.patch
+.legendarycoin
+*.dll
+
+# Compilation and Qt preprocessor part
+*.qm
+Makefile
+#litecoin-qt
+#Litecoin-Qt.app
+
+# Unit-tests
+Makefile.test
+legendarycoin-qt_test
+
+# Resources cpp
+qrc_*.cpp
+
+# Qt creator
+*.pro.user
+Makefile.Debug
+Makefile.Release
+object_script.legendarycoin-qt.Debug
+object_script.legendarycoin-qt.Release
+release/
+
+# Mac specific
+.DS_Store
+.AppleDouble
+.LSOverride
+build
+
+!src/leveldb-*/Makefile
