@@ -1,5 +1,12 @@
 LegendaryCoin (LGD) - PoS/PoW hybrid.
 
+LegendaryCoin combines the great features from and is a descendent of:
+   - Philosopherstone (Gui Enhancements)
+   - DiamondCoin (several algorithms fixed and improved)
+   - Novacoin/PPCoin (Hybrid Pow/PoS)
+   - Luckycoin (random blocks)
+   - Florincoin (transaction message)
+
 General Info / Features:
 
    - Data Port: 8877 (18877 Testnet)
