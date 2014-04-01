@@ -39,4 +39,4 @@ release/
 .LSOverride
 build
 
-!src/leveldb-*/Makefile
+!src/leveldb/Makefile
