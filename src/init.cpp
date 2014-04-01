@@ -860,7 +860,8 @@ bool AppInit2()
     if (!strErrors.str().empty())
         return InitError(strErrors.str());
 
-
+     // Add wallet transactions that aren't already in a block to mapTransactions
+    pwalletMain->ReacceptWalletTransactions();
 
 
     // Genesis block
@@ -900,9 +901,6 @@ bool AppInit2()
     txdb.TxnCommit();
 }
 
-
-     // Add wallet transactions that aren't already in a block to mapTransactions
-    pwalletMain->ReacceptWalletTransactions();
 
 #if !defined(QT_GUI)
     // Loop until process is exit()ed from shutdown() function,
