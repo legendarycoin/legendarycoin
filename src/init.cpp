@@ -870,7 +870,7 @@ bool AppInit2()
     txNew.vin.resize(1);
     txNew.vout.resize(1);
     txNew.vin[0].scriptSig = CScript() << 486604799 << CBigNum(9999) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-    txNew.vout[0].nValue = PREMINE;
+    txNew.vout[0].nValue = 300000 * COIN;
     txNew.vout[0].scriptPubKey = CScript() << ParseHex("04e63785e00477069341c06ba40d2fc30ed286c4f82f3a1d3a2d54046b166ad8bf01b5fdba1e81b89ac8cf7e65a2782428f5a91ce5bd75dd4bef895f8dea14ccc1") << OP_CHECKSIG; // a privkey for that 'vanity' pubkey would be interesting ;)
     txNew.strTxComment = "text:LegendaryCoin genesis block";
     CBlock block;
