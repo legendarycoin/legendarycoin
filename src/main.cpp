@@ -493,8 +493,8 @@ bool CTransaction::CheckTransaction() const
 
     if (IsCoinBase())
     {
-        if (vin[0].scriptSig.size() < 2 || vin[0].scriptSig.size() > 100)
-            return DoS(100, error("CTransaction::CheckTransaction() : coinbase script size"));
+        if (vin[0].scriptSig.size() < 2 || vin[0].scriptSig.size() > 120)
+            return DoS(100, error("CTransaction::CheckTransaction() : coinbase script size (%lu)",vin[0].scriptSig.size()));
     }
     else
     {
@@ -4152,7 +4152,7 @@ void IncrementExtraNonce(CBlock* pblock, CBlockIndex* pindexPrev, unsigned int& 
     ++nExtraNonce;
     unsigned int nHeight = pindexPrev->nHeight+1; // Height first in coinbase required for block.version=2
     pblock->vtx[0].vin[0].scriptSig = (CScript() << nHeight << CBigNum(nExtraNonce)) + COINBASE_FLAGS;
-    assert(pblock->vtx[0].vin[0].scriptSig.size() <= 100);
+    assert(pblock->vtx[0].vin[0].scriptSig.size() <= 120);
 
     pblock->hashMerkleRoot = pblock->BuildMerkleTree();
 }
