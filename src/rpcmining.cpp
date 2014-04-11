@@ -58,6 +58,10 @@ Value getmininginfo(const Array& params, bool fHelp)
 
     double dNetworkMhps = GetDifficulty() * 4294.967296 / nTargetSpacingWork;
     double dNetworkWeight = dStakeKernelsTriedAvg / nStakesTime;
+    if ( dNetworkWeight != dNetworkWeight )
+    {
+        dNetworkWeight = 0;
+    }
 
     Object obj;
     obj.push_back(Pair("blocks", (int)nBestHeight));
