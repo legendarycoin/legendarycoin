@@ -53,6 +53,7 @@ static const int fHaveUPnP = false;
 
 static const uint256 hashGenesisBlockOfficial("0x00000f4cec95a0c855af867017436d6dfdc90c6b79b8d7768b1147fd1297d88c");
 static const uint256 hashGenesisBlockTestNet ("0x00000f4cec95a0c855af867017436d6dfdc90c6b79b8d7768b1147fd1297d88c");
+static const uint256 hashGenesisTransaction  ("0xce158ed8aac7a6d042980b49421ea6af8784f403e203a476103cd72e898c44a8");
 
 static const int64 nMaxClockDrift = 2 * 60 * 60;        // two hours
 
@@ -529,6 +530,18 @@ public:
         return fNewer;
     }
 
+    bool IsGenesis() const
+    {
+      if (vin.size() == 0)
+	return false;
+
+	BOOST_FOREACH(const CTxIn& tx, vin)
+	  if (tx.prevout.hash == hashGenesisTransaction)
+	    return true;
+
+	  return false;
+    }
+
     bool IsCoinBase() const
     {
         return (vin.size() == 1 && vin[0].prevout.IsNull() && vout.size() >= 1);
@@ -652,7 +665,7 @@ public:
     {
         std::string str;
         str += IsCoinBase()? "Coinbase" : (IsCoinStake()? "Coinstake" : "CTransaction");
-        str += strprintf("(hash=%s, nTime=%d, ver=%d, vin.size=%"PRIszu", vout.size=%"PRIszu", nLockTime=%d)\n",
+        str += strprintf("(hash=%s, nTime=%d, ver=%d, vin.size=%"PRIszu", vout.size=%"PRIszu", nLockTime=%d)\nTxComment=%s\n",
             GetHash().ToString().substr(0,10).c_str(),
             nTime,
             nVersion,
