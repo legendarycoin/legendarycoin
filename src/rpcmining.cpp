@@ -56,7 +56,7 @@ Value getmininginfo(const Array& params, bool fHelp)
         pindex = pindex->pprev;
     }
 
-    double dNetworkMhps = GetDifficulty() * 4294.967296 / nTargetSpacingWork;
+    //double dNetworkMhps = GetDifficulty() * 4294.967296 / nTargetSpacingWork;
     double dNetworkWeight = dStakeKernelsTriedAvg / nStakesTime;
     if ( dNetworkWeight != dNetworkWeight )
     {

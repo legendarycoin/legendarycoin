@@ -639,7 +639,8 @@ bool AppInit2()
 
     BOOST_FOREACH(string strDest, mapMultiArgs["-seednode"])
         AddOneShot(strDest);
-        AddOneShot("54.201.128.214");
+        // ******
+        //AddOneShot("54.201.128.214");
 
     // TODO: replace this by DNSseed
     // AddOneShot(string(""));
@@ -890,7 +891,7 @@ bool AppInit2()
     LOCK(mempool.cs);
     mempool.addUnchecked(hash,txNew);
 }
-
+ 
 {
     CTxDB txdb;
     txdb.TxnBegin();
