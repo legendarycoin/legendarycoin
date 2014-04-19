@@ -34,6 +34,8 @@ namespace Checkpoints
         ( 7500, uint256("0xd5d907e11421e88763d7f8c7af84ab07f80c62836be7c3a358dd00780628d484"))
         (10000, uint256("0x000000004bff18b19b386225d26fc0c7bd225d8591901e37fd5a768ba27fb4cd"))
         (10750, uint256("0x00000000673a8588b8c77681985267d6b7befb6b65b54a6c65d11645bb4b0547"))
+        (11928, uint256("0x0650616066efa126f701a928f727e563a0dd6fcefed0375ff872f15d62721859"))
+        (11950, uint256("0x0000000059ec8489aa40ba1d7b108234f6058186e46e410e13cc7a0c1535727e"))
 	;
 
     static MapCheckpoints mapCheckpointsTestnet =
@@ -369,7 +371,7 @@ namespace Checkpoints
 }
 
 // ppcoin: sync-checkpoint master key
-const std::string CSyncCheckpoint::strMasterPubKey = "04ef4f28d454e065395315574dfb64e380f77c434beb34da8cce6ac994db63f4dc6c296d2dfc08a79678e5786bb00a865de85aaf0f86d9dfe567fcad8e803c4fba";
+const std::string CSyncCheckpoint::strMasterPubKey = "04e41eab9e8d8e0e783aff7c279a3b827b64ad20af6ad49ac2dfdb64e1451d4dbd1af90bd0b63b9253b7fd9bf607ec41d021dacee86db79b4e2abf9cf6bfe45b39";
 
 std::string CSyncCheckpoint::strMasterPrivKey = "";
 
