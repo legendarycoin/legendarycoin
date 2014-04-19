@@ -2,7 +2,10 @@
 # Distributed under the MIT/X11 software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
 
-#DEPSDIR:=/usr/i686-w64-mingw32
+DEPSDIR:=/usr/i686-w64-mingw32
+
+CC := i686-w64-mingw32-gcc
+CXX := i686-w64-mingw32-g++
 
 USE_UPNP:=0
 USE_IPV6:=1
@@ -12,12 +15,11 @@ INCLUDEPATHS= \
  -I"$(CURDIR)" \
  -I"$(CURDIR)"/obj \
  -I"$(DEPSDIR)/include" \
- -I"/usr/i686-w64-mingw32" \
  -I"$(DEPSDIR)"
 
 LIBPATHS= \
  -L"$(DEPSDIR)/lib" \
- -L"/usr/i686-w64-mingw32/lib"
+ -L$(CURDIR)/leveldb
 
 LIBS= \
   $(CURDIR)/leveldb/libleveldb.a $(CURDIR)/leveldb/libmemenv.a \
@@ -28,6 +30,7 @@ LIBS= \
  -l boost_chrono-mt-s \
  -l db_cxx \
  -l ssl \
+ -l leveldb \
  -l crypto
 
 DEFS=-D_MT -DWIN32 -D_WINDOWS -DBOOST_THREAD_USE_LIB -DBOOST_SPIRIT_THREADSAFE
@@ -56,6 +59,7 @@ LIBS += -l mingwthrd -l kernel32 -l user32 -l gdi32 -l comdlg32 -l winspool -l w
 HEADERS = $(wildcard *.h)
 
 OBJS= \
+    leveldb/libleveldb.a \
     obj/alert.o \
     obj/version.o \
     obj/checkpoints.o \
@@ -91,13 +95,13 @@ OBJS= \
 
 all: legendarycoind.exe
 
-LIBS += $(CURDIR)/leveldb/libleveldb.lib $(CURDIR)/leveldb/libmemenv.lib
+LIBS += $(CURDIR)/leveldb/libleveldb.a $(CURDIR)/leveldb/libmemenv.a
 DEFS += -I"$(CURDIR)/leveldb/include" -DUSE_LEVELDB
 DEFS += -I"$(CURDIR)/leveldb/helpers"
 OBJS += obj/txdb-leveldb.o
-leveldb/libleveldb.lib:
+leveldb/libleveldb.a:
 	@echo "Building LevelDB ..." && cd leveldb && TARGET_OS=OS_WINDOWS_CROSSCOMPILE $(MAKE) CC=$(CC) CXX=$(CXX) OPT="$(CFLAGS)" libleveldb.a libmemenv.a && i686-w64-mingw32-ranlib libleveldb.a && i686-w64-mingw32-ranlib libmemenv.a && cd ..
-obj/txdb-leveldb.o: leveldb/libleveldb.lib
+obj/txdb-leveldb.o: leveldb/libleveldb.a
 
 
 obj/build.h: FORCE
