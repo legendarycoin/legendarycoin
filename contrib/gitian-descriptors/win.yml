@@ -69,5 +69,5 @@ script: |
   mkdir ../release
   cp ../../release/* ../release/
   cp ../../src/*.exe .
-  sed -e "s#{{VER}}#${VERSION}#g" ../share/setup.nsi 
-  makensis ../share/setup.nsi
+  sed -e "s#{{VER}}#${VERSION}#g" ../share/setup.nsi > ../share/setup-final.nsi
+  makensis ../share/setup-final.nsi
