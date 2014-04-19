@@ -11,12 +11,13 @@ packages:
 - "unzip"
 - "nsis"
 - "faketime"
+- "upx"
+- "vim-nox"
 reference_datetime: "2011-01-30 00:00:00"
 remotes:
 - "url": "https://github.com/legendarycoin/legendarycoin.git"
   "dir": "LGD"
 files:
-- "lgd.zip"
 - "qt-win32-4.8.3-gitian-r4.zip"
 - "boost-win32-1.55.0-gitian-r6.zip"
 - "bitcoin-deps-win32-gitian-r9.zip"
@@ -27,7 +28,7 @@ script: |
   #
   mkdir -p $STAGING
   cd $STAGING
-  unzip -o ../build/lgd.zip
+  #unzip -o ../build/lgd.zip
   unzip ../build/qt-win32-4.8.3-gitian-r4.zip
   unzip ../build/boost-win32-1.55.0-gitian-r6.zip
   unzip ../build/bitcoin-deps-win32-gitian-r9.zip
@@ -36,8 +37,9 @@ script: |
   cd LGD
   export PATH=$STAGING/host/bin:$PATH
   mkdir -p $OUTDIR/src
-  cp -r $STAGING/LGD/* $OUTDIR/src
-  cp -r $STAGING/LGD/* $HOME/build/LGD
+  git archive HEAD | tar -x -C $OUTDIR/src
+  #cp -r $STAGING/LGD/* $OUTDIR/src
+  #cp -r $STAGING/LGD/* $HOME/build/LGD
   cp $OUTDIR/src/doc/README_windows.txt $OUTDIR/readme.txt
   cp $OUTDIR/src/COPYING $OUTDIR/COPYING.txt
   export LD_PRELOAD=/usr/lib/faketime/libfaketime.so.1
@@ -47,6 +49,7 @@ script: |
   $HOME/staging/host/bin/qmake -spec unsupported/win32-g++-cross MINIUPNPC_LIB_PATH=$STAGING MINIUPNPC_INCLUDE_PATH=$STAGING BDB_LIB_PATH=$STAGING BDB_INCLUDE_PATH=$STAGING BOOST_LIB_PATH=$STAGING BOOST_INCLUDE_PATH=$STAGING BOOST_LIB_SUFFIX=-mt-s BOOST_THREAD_LIB_SUFFIX=_win32-mt-s OPENSSL_LIB_PATH=$STAGING OPENSSL_INCLUDE_PATH=$STAGING QRENCODE_LIB_PATH=$STAGING QRENCODE_INCLUDE_PATH=$STAGING USE_QRCODE=1 INCLUDEPATH=$STAGING DEFINES=BOOST_THREAD_USE_LIB BITCOIN_NEED_QT_PLUGINS=1 QMAKE_LRELEASE=lrelease QMAKE_CXXFLAGS=-frandom-seed=litecoin USE_BUILD_INFO=1 USE_SSE2=1
   make $MAKEOPTS
   $HOST-strip release/legendarycoin-qt.exe
+  upx --lzma legendarycoin-qt.exe
   cp release/legendarycoin-qt.exe $OUTDIR/
   #
   cd src
@@ -55,14 +58,16 @@ script: |
   export TZ=UTC
   make -f makefile.linux-mingw $MAKEOPTS DEPSDIR=$STAGING legendarycoind.exe USE_UPNP=0 DEBUGFLAGS="-frandom-seed=litecoin" USE_SSE2=1 USE_LEVELDB=1
   $HOST-strip legendarycoind.exe
+  upx --lzma legendarycoind.exe
   mkdir $OUTDIR/daemon
   cp legendarycoind.exe $OUTDIR/daemon
+  VERSION=`cat version.h | grep -E ".*DISPLAY_VERSION_[^ ]+[ ]+" | sed 's/.*[ ]\+//g' | sed ':a;N;$!ba;s/\n/./g'`
   cd ..
-  #mkdir nsis
-  #git archive HEAD | tar -x -C nsis
-  #cd nsis/src
-  #mkdir ../release
-  #cp ../../release/* ../release/
-  #cp ../../src/*.exe .
-  #makensis ../share/setup.nsi
-  #cp ../share/litecoin-*-win32-setup.exe $OUTDIR/
+  mkdir nsis
+  git archive HEAD | tar -x -C nsis
+  cd nsis/src
+  mkdir ../release
+  cp ../../release/* ../release/
+  cp ../../src/*.exe .
+  sed -e "s#{{VER}}#${VERSION}#g" ../share/setup.nsi 
+  makensis ../share/setup.nsi
