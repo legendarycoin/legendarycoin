@@ -71,3 +71,4 @@ script: |
   cp ../../src/*.exe .
   sed -e "s#{{VER}}#${VERSION}#g" ../share/setup.nsi > ../share/setup-final.nsi
   makensis ../share/setup-final.nsi
+  cp ../share/LegendaryCoin-win32-setup.exe $OUTDIR
