@@ -643,6 +643,7 @@ bool AppInit2()
         
     AddOneShot("192.227.242.237");
     AddOneShot("5.175.194.173");
+    AddOneShot("198.23.161.55");
 
     // TODO: replace this by DNSseed
     // AddOneShot(string(""));
