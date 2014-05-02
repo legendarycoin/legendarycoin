@@ -376,7 +376,7 @@ namespace Checkpoints
 }
 
 // ppcoin: sync-checkpoint master key
-const std::string CSyncCheckpoint::strMasterPubKey = "04014726ac2f5b75c532b8319e3c7ad6108f568972063043f37914476f77c2a0dc4e155fb68761bc3820d20057b6015e25a0fe272dba30826f2a89a52dc02ec47bc275fb5f33eb2dfa67a7a52f8658ed09176e37a0584ad2265db99c37e95871e5";
+const std::string CSyncCheckpoint::strMasterPubKey = "04e41eab9e8d8e0e783aff7c279a3b827b64ad20af6ad49ac2dfdb64e1451d4dbd1af90bd0b63b9253b7fd9bf607ec41d021dacee86db79b4e2abf9cf6bfe45b39";
 
 std::string CSyncCheckpoint::strMasterPrivKey = "";
 
