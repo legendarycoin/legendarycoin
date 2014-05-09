@@ -219,6 +219,17 @@
       </widget>
      </item>
      <item>
+      <widget class="QGraphicsView" name="graphicsView">
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background: url(:/icons/res/images/logo.png) no-repeat; border:none;
+        </string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <spacer name="verticalSpacer">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
