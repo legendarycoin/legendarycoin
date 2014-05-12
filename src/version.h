@@ -42,7 +42,7 @@ static const int NOBLKS_VERSION_END = 60007;
 // BIP 0031, pong message, is enabled for all versions AFTER this one
 static const int BIP0031_VERSION = 60000;
 
-// "mempool" command, enhanced "getdata" behavior starts with this version:
+// "mempool" command, enhanced "getdata" behavior starts with this version
 static const int MEMPOOL_GD_VERSION = 60002;
 
 #define DISPLAY_VERSION_MAJOR       1
