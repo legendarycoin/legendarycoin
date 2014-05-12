@@ -1,4 +1,5 @@
-LegendaryCoin (LGD) - PoS/PoW hybrid.
+# LegendaryCoin (LGD) - PoS/PoW hybrid. #
+![alt tag](http://i.imgur.com/v3kCA1R.png)
 
 LegendaryCoin combines the great features from and is a descendent of:
    - Philosopherstone (Gui Enhancements)
