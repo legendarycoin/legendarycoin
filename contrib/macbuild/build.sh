@@ -32,12 +32,18 @@ install_name_tool -change QtNetwork.framework/Versions/4/QtNetwork @executable_p
 install_name_tool -change QtCore.framework/Versions/4/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/4/QtCore legendarycoin-qt.app/Contents/Frameworks/QtGui.framework/Versions/4/QtGui
 install_name_tool -change QtCore.framework/Versions/4/QtCore @executable_path/../Frameworks/QtCore.framework/Versions/4/QtCore legendarycoin-qt.app/Contents/Frameworks/QtNetwork.framework/Versions/4/QtNetwork
 
+#######################################################################################################################################
+# SSL
+#######################################################################################################################################
 
 cp -R /opt/local/lib/libssl.1.0.0.dylib legendarycoin-qt.app/Contents/Frameworks
 chmod +w legendarycoin-qt.app/Contents/Frameworks/libssl.1.0.0.dylib
 install_name_tool -id @executable_path/../Frameworks/libssl.1.0.0.dylib legendarycoin-qt.app/Contents/Frameworks/libssl.1.0.0.dylib
 install_name_tool -change /opt/local/lib/libssl.1.0.0.dylib @executable_path/../Frameworks/libssl.1.0.0.dylib legendarycoin-qt.app/Contents/MacOS/legendarycoin-qt
 
+#######################################################################################################################################
+# Crypto
+#######################################################################################################################################
 
 cp -R /opt/local/lib/libcrypto.1.0.0.dylib legendarycoin-qt.app/Contents/Frameworks
 chmod +w legendarycoin-qt.app/Contents/Frameworks/libcrypto.1.0.0.dylib
@@ -45,10 +51,17 @@ install_name_tool -id @executable_path/../Frameworks/libcrypto.1.0.0.dylib legen
 install_name_tool -change /opt/local/lib/libcrypto.1.0.0.dylib @executable_path/../Frameworks/libcrypto.1.0.0.dylib legendarycoin-qt.app/Contents/Frameworks/libssl.1.0.0.dylib
 install_name_tool -change /opt/local/lib/libcrypto.1.0.0.dylib @executable_path/../Frameworks/libcrypto.1.0.0.dylib legendarycoin-qt.app/Contents/MacOS/legendarycoin-qt
 
+#######################################################################################################################################
+# db48
+#######################################################################################################################################
    
 cp -R /opt/local/lib/db48/libdb_cxx-4.8.dylib legendarycoin-qt.app/Contents/Frameworks
 install_name_tool -id @executable_path/../Frameworks/libdb_cxx-4.8.dylib legendarycoin-qt.app/Contents/Frameworks/libdb_cxx-4.8.dylib
 install_name_tool -change /opt/local/lib/db48/libdb_cxx-4.8.dylib @executable_path/../Frameworks/libdb_cxx-4.8.dylib legendarycoin-qt.app/Contents/MacOS/legendarycoin-qt
+
+#######################################################################################################################################
+# libz
+#######################################################################################################################################
 
 cp -R /opt/local/lib/libz.1.2.8.dylib legendarycoin-qt.app/Contents/Frameworks
 cp -R /opt/local/lib/libz.1.dylib legendarycoin-qt.app/Contents/Frameworks
@@ -56,10 +69,17 @@ install_name_tool -id @executable_path/../Frameworks/libz.1.dylib legendarycoin-
 install_name_tool -change /opt/local/lib/libz.1.dylib @executable_path/../Frameworks/libz.1.dylib legendarycoin-qt.app/Contents/Frameworks/libcrypto.1.0.0.dylib
 install_name_tool -change /opt/local/lib/libz.1.dylib @executable_path/../Frameworks/libz.1.dylib legendarycoin-qt.app/Contents/Frameworks/libssl.1.0.0.dylib
 
+#######################################################################################################################################
+# UPNP
+#######################################################################################################################################
+
 cp -R /opt/local/lib/libminiupnpc.10.dylib legendarycoin-qt.app/Contents/Frameworks
 install_name_tool -id @executable_path/../Frameworks/libminiupnpc.10.dylib legendarycoin-qt.app/Contents/Frameworks/libminiupnpc.10.dylib
 install_name_tool -change /opt/local/lib/libminiupnpc.10.dylib @executable_path/../Frameworks/libminiupnpc.10.dylib legendarycoin-qt.app/Contents/MacOS/legendarycoin-qt
 
+#######################################################################################################################################
+# Boost
+#######################################################################################################################################
 
 cp -R /opt/local/lib/libboost_chrono-mt.dylib legendarycoin-qt.app/Contents/Frameworks
 cp -R /opt/local/lib/libboost_filesystem-mt.dylib legendarycoin-qt.app/Contents/Frameworks
