@@ -246,8 +246,12 @@ static bool GetKernelStakeModifier(uint256 hashBlockFrom, uint64& nStakeModifier
 			{
 				// printf(">> nStakeModifierTime = %"PRI64d", pindexFrom->GetBlockTime() = %"PRI64d", nStakeModifierSelectionInterval = %"PRI64d"\n",
 				//	nStakeModifierTime, pindexFrom->GetBlockTime(), nStakeModifierSelectionInterval);
-                return error("GetKernelStakeModifier() : new future block ( nStakeModifierTime = %"PRI64d", pindexFrom->GetBlockTime() = %"PRI64d", nStakeModifierSelectionInterval = %"PRI64d" )\n",
+                if (fDebug)
+		  return error("GetKernelStakeModifier() : new future block ( nStakeModifierTime = %"PRI64d", pindexFrom->GetBlockTime() = %"PRI64d", nStakeModifierSelectionInterval = %"PRI64d" )\n",
                   nStakeModifierTime, pindexFrom->GetBlockTime(), nStakeModifierSelectionInterval);
+		else
+		  return false;
+			  
 			}
         }
         pindex = pindex->pnext;
@@ -312,7 +316,10 @@ bool CheckStakeKernelHash(unsigned int nBits, const CBlock& blockFrom, unsigned 
 
     if (!GetKernelStakeModifier(blockFrom.GetHash(), nStakeModifier, nStakeModifierHeight, nStakeModifierTime, fPrintProofOfStake))
 	{
-        return error("CheckStakeKernelHash() : GetKernelStakeModifier return false\n");;
+	  if (fDebug)
+	    return error("CheckStakeKernelHash() : GetKernelStakeModifier return false\n");
+	  else
+	    return false;
 	}
     ss << nStakeModifier;
 
@@ -339,7 +346,10 @@ bool CheckStakeKernelHash(unsigned int nBits, const CBlock& blockFrom, unsigned 
 		// printf(">>> bnCoinDayWeight = %s, bnTargetPerCoinDay=%s\n", 
 		//	bnCoinDayWeight.ToString().c_str(), bnTargetPerCoinDay.ToString().c_str()); 
 		// printf(">>> CheckStakeKernelHash - hashProofOfStake too much\n");
-        return error("CheckStakeKernelHash() : proof-of-stake hash does not meet target protocol");
+        if (fDebug)
+	  return error("CheckStakeKernelHash() : proof-of-stake hash does not meet target protocol");
+	else
+	  return false;
 	}
 
     if (fDebug && !fPrintProofOfStake)
